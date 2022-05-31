@@ -1,6 +1,8 @@
+package com.factura;
+
 import java.util.Scanner;
 
-public class ejemploMeaven {
+public class Main {
 
 
     public static void main(String[] args) {
