@@ -10,23 +10,23 @@ public class conexion {
         String password = "sasa";
 
 
-        try (Connection con = DriverManager.getConnection(url, username, password)) {
-            System.out.println("Conexion exitosa");
+        try (Connection con = DriverManager.getConnection(url, username, password);
             // verificar que saca informacion de la base de datos
             Statement stmt = con.createStatement();
-             ResultSet resultado = stmt.executeQuery("SELECT * FROM clientes");
+            ResultSet resultado = stmt.executeQuery("SELECT * FROM clientes")) {
+            
+            System.out.println("Conexion exitosa");
+            while(resultado.next()){
+                System.out.println(resultado.getString("nombre"));
+            }
 
-             while(resultado.next()){
-            System.out.println(resultado.getString("nombre"));
-             }
-          
 
 
-            }catch (SQLException e){
+        }catch (SQLException e){
 
             System.out.println("Error de conexion");
 
-            
+
 
 
         }
