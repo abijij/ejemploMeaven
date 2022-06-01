@@ -19,8 +19,7 @@ public class conexion {
              while(resultado.next()){
             System.out.println(resultado.getString("nombre"));
              }
-            resultado.close();
-            stmt.close();
+          
 
 
             }catch (SQLException e){
