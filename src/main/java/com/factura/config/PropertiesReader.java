@@ -12,7 +12,7 @@ public class PropertiesReader {
         if (properties == null) {
             System.out.println("Carga properties");
             properties = new Properties();
-            properties.load(ClassLoader.getSystemResourceAsStream("application.properties"));
+            properties.load(ClassLoader.getSystemResourceAsStream("aplication.properties"));
             return properties;
         }
         return properties;
