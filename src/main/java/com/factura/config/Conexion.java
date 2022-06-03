@@ -1,4 +1,4 @@
-package com.factura;
+package com.factura.config;
 
 import com.factura.config.PropertiesReader;
 

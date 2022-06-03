@@ -1,6 +1,9 @@
 package com.factura;
 
+import com.factura.config.Conexion;
 import com.factura.config.PropertiesReader;
+import com.factura.dtos.Cliente;
+import com.factura.services.ClienteService;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -31,6 +34,12 @@ public class Main {
         } catch (SQLException e) {
             System.out.println("Fallo al intentar conectar con bs");
             e.printStackTrace();
+        }
+        Cliente cliente = new Cliente();
+        cliente.setId(1);
+        cliente.setNombre("EDGAR");
+        if(ClienteService.guardarCliente(cliente)){
+            System.out.println("Guardado exitosamente");
         }
 
         Scanner scanner = new Scanner(System.in);
