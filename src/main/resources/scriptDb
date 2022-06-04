@@ -1,0 +1,55 @@
+CREATE SCHEMA `op` ;
+CREATE TABLE `op`.`clientes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `apellidoP` VARCHAR(45) NOT NULL,
+  `apellidoM` VARCHAR(45) NOT NULL,
+  `rfc` VARCHAR(45) NOT NULL,
+  `fechaRegistro` DATETIME NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+  INSERT INTO `op`.`clientes` (`id`, `nombre`, `apellidoP`, `apellidoM`, `rfc`, `fechaRegistro`, `correo`) VALUES ('1', 'Edgar', 'Gutierrez', 'Casañas', 'GUCE960715KA5', '2022-05-31 00:00:00', 'edgar.abijij24@gmail.com');
+INSERT INTO `op`.`clientes` (`id`, `nombre`, `apellidoP`, `apellidoM`, `rfc`, `fechaRegistro`, `correo`) VALUES ('2', 'Gabriela', 'Ponce', 'Hernadez', 'POHG99040929A', '2022-05-31 00:00:00', 'gavvpoce1824@gmail.com');
+ALTER TABLE clientes ADD direccion VARCHAR(45) NOT NULL;
+UPDATE `op`.`clientes` SET `direccion` = 'Constitucion de la Republica 158' WHERE (`id` = '1');
+UPDATE `op`.`clientes` SET `direccion` = 'Prolongacion Hidalgo 50' WHERE (`id` = '2');
+CREATE TABLE `op`.`vendedor` (
+  `idVendedor` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `turno` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idVendedor`));
+  INSERT INTO `op`.`vendedor` (`nombre`, `turno`) VALUES ('Diego G.', 'Vespertino');
+  CREATE TABLE `op`.`productos` (
+  `idProducto` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(45) NOT NULL,
+  `nVendedor`  INT NOT NULL,
+  `precioCosto` DOUBLE NOT NULL,
+  `precioVenta` DOUBLE NOT NULL,
+  PRIMARY KEY (`idProducto`));
+  ALTER TABLE  productos ADD CONSTRAINT fk_proven FOREIGN KEY (nVendedor) REFERENCES vendedor (idVendedor) ON DELETE CASCADE ON UPDATE CASCADE;
+  CREATE TABLE `op`.`factura` (
+  `idfactura` INT NOT NULL AUTO_INCREMENT,
+  `fecha` DATETIME NOT NULL,
+  `idCliente` INT NOT NULL,
+  `totalfactura` DOUBLE NOT NULL,
+  PRIMARY KEY (`idfactura`));
+  ALTER TABLE  factura ADD CONSTRAINT fk_clifa FOREIGN KEY (idCliente) REFERENCES clientes (id) ON DELETE CASCADE ON UPDATE CASCADE;
+  CREATE TABLE `op`.`detalleFactura` (
+  `idFacturaF` INT NOT NULL AUTO_INCREMENT,
+  `noFactura` INT NOT NULL,
+  `codProducto` INT NOT NULL,
+  `cantidadPedida` DOUBLE NOT NULL,
+  `precioTotal` DOUBLE NOT NULL,
+  PRIMARY KEY (`idFacturaF`));
+  ALTER TABLE  detalleFactura ADD CONSTRAINT fk_defa FOREIGN KEY (noFactura) REFERENCES factura (idfactura) ON DELETE CASCADE ON UPDATE CASCADE;
+  ALTER TABLE  detalleFactura ADD CONSTRAINT fk_fapro FOREIGN KEY (codProducto) REFERENCES productos (idProducto) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `op`.`factura` (`fecha`, `idCliente`, `totalfactura`) VALUES ('2022-06-04', '1', '150');
+INSERT INTO `op`.`factura` (`fecha`, `idCliente`, `totalfactura`) VALUES ('2022-06-04', '2', '350');
+INSERT INTO `op`.`factura` (`fecha`, `idCliente`, `totalfactura`) VALUES ('2022-06-04', '1', '450');
+INSERT INTO `op`.`productos` (`descripcion`, `nVendedor`, `precioCosto`, `precioVenta`) VALUES ('Bota de trabajo', '1', '100', '150');
+INSERT INTO `op`.`productos` (`descripcion`, `nVendedor`, `precioCosto`, `precioVenta`) VALUES ('Tenis enfermera', '1', '325.25', '350');
+INSERT INTO `op`.`productos` (`descripcion`, `nVendedor`, `precioCosto`, `precioVenta`) VALUES ('Bota Militar', '1', '415.55', '450');
+INSERT INTO `op`.`detallefactura` (`noFactura`, `codProducto`, `cantidadPedida`, `precioTotal`) VALUES ('1', '1', '1', '150');
+INSERT INTO `op`.`detallefactura` (`noFactura`, `codProducto`, `cantidadPedida`, `precioTotal`) VALUES ('2', '2', '1', '350');
+INSERT INTO `op`.`detallefactura` (`noFactura`, `codProducto`, `cantidadPedida`, `precioTotal`) VALUES ('3', '3', '1', '450');
+
